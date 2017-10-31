@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031152720) do
+ActiveRecord::Schema.define(version: 20171031170355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "avg_weekly_reports", force: :cascade do |t|
+    t.string "month_year"
+    t.float "avg_weekly_hours"
+    t.float "avg_hourly_wages"
+    t.float "avg_weekly_earnings"
+    t.bigint "state_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state_id"], name: "index_avg_weekly_reports_on_state_id"
+  end
 
   create_table "crimes", force: :cascade do |t|
     t.integer "year"
@@ -40,4 +51,11 @@ ActiveRecord::Schema.define(version: 20171031152720) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "avg_weekly_reports", "states"
 end

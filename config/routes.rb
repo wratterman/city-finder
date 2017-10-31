@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'crime_years/', to: "crime_years#index", as: :crimes
-  get 'crime_years/:id', to: "crime_years#show", as: :crime
+  get 'api/v1/crime_years/', to: "api/v1/crime_years#index", as: :crimes
+  get 'api/v1/crime_years/:year', to: "api/v1/crime_years#show", as: :crime
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'api/v1/avg_weekly_reports/', to: "api/v1/states#index", as: :states
+  get 'api/v1/avg_weekly_reports/:id', to: "api/v1/states#show", as: :state
 end

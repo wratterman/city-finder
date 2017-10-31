@@ -38,6 +38,56 @@ def seed_crimes
   end
 end
 
+def seed_states_with_employment
+  AvgWeeklyReport.destroy_all
+  State.destroy_all
+  CSV.foreach("./db/csvs/Avg-Weekly-Hours.csv", encoding: "bom|utf-8",:headers => true) do |row|
+    state = State.create(name: row["State"])
+    seed_reports(state)
+    puts "Weekly Reports saved for for #{state.name}"
+  end
+end
+
+def seed_reports(state)
+  report   = AvgWeeklyReport.new(state: state)
+  report_2 = AvgWeeklyReport.new(state: state)
+  report_3 = AvgWeeklyReport.new(state: state)
+
+  CSV.foreach("./db/csvs/Avg-Weekly-Hours.csv", encoding: "bom|utf-8", :headers => true) do |row|
+    if row["State"] == state.name
+      puts "Weekly Hours saved for for #{state.name}"
+      report.month_year = "Sept. 2016"
+      report.avg_weekly_hours = row["Sept. 2016"].to_f
+      report_2.month_year = "Aug. 2017"
+      report_2.avg_weekly_hours = row["Aug. 2017"].to_f
+      report_3.avg_weekly_hours = row["Sept. 2017"].to_f
+      report_3.month_year = "Sept. 2017"
+    end
+  end
+
+  CSV.foreach("./db/csvs/Avg-Hourly-Wages.csv", encoding: "bom|utf-8", :headers => true) do |row|
+    if row["State"] == state.name
+      puts "Hourly Wages saved for for #{state.name}"
+      report.avg_hourly_wages = row["Sept. 2016"].to_f
+      report_2.avg_hourly_wages = row["Aug. 2017"].to_f
+      report_3.avg_hourly_wages = row["Sept. 2017"].to_f
+    end
+  end
+
+  CSV.foreach("./db/csvs/Avg-Weekly-Earnings.csv", encoding: "bom|utf-8", :headers => true) do |row|
+    if row["State"] == state.name
+      puts "Weekly Earnings saved for for #{state.name}"
+      report.avg_weekly_earnings   = row["Sept. 2016"].to_f
+      report_2.avg_weekly_earnings = row["Aug. 2017"].to_f
+      report_3.avg_weekly_earnings = row["Sept. 2017"].to_f
+    end
+  end
+
+  report.save
+  report_2.save
+  report_3.save
+end
+
 def sanitize(row_header)
   if row_header.include?(",")
     row_header.gsub!(",", "")
@@ -46,3 +96,4 @@ def sanitize(row_header)
 end
 
 seed_crimes
+seed_states_with_employment
