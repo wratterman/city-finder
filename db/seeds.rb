@@ -135,8 +135,11 @@ def create_cities(row, state)
 end
 
 def calculate_rate(pop, crime)
-  rate = crime.to_f / pop.to_f
-  return rate.round(1)
+  formatted_pop = sanitize(pop)
+  formatted_crime = sanitize(crime)
+  rate = formatted_crime.to_f / formatted_pop.to_f
+  per_100k = rate * 100000.0
+  return per_100k.round(1)
 end
 
 def nil_finder(row)
@@ -144,7 +147,9 @@ def nil_finder(row)
 end
 
 def sanitize(row_header)
-  if row_header.include?(",")
+  if row_header.nil?
+    row_header = "0"
+  elsif row_header.include?(",")
     row_header.gsub!(",", "")
   end
   return row_header
