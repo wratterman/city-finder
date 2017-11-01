@@ -9,4 +9,8 @@ class Api::V1::CrimeStatesController < ApplicationController
     @state = State.find(id)
     render json: @state, serializer: CrimeStatesSerializer
   end
+
+  def redirect_to_show
+    redirect_to action: :show
+  end
 end
