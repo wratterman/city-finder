@@ -5,8 +5,7 @@ class Api::V1::CrimeStatesController < ApplicationController
   end
 
   def show
-    id = params[:id]
-    @state = State.find(id)
+    @state = State.find_by(name: params[:state].downcase.capitalize)
     render json: @state, serializer: CrimeStatesSerializer
   end
 
