@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe City, type: :model do
+RSpec.describe AvgWeeklyReport, type: :model do
   describe "associations" do
     it { is_expected.to belong_to(:state) }
   end
