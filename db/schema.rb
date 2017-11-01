@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031170355) do
+ActiveRecord::Schema.define(version: 20171031234211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,33 @@ ActiveRecord::Schema.define(version: 20171031170355) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["state_id"], name: "index_avg_weekly_reports_on_state_id"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.integer "population"
+    t.integer "violent_crime"
+    t.float "violent_crime_rate"
+    t.integer "murder_manslaughter"
+    t.float "murder_manslaughter_rate"
+    t.integer "rape"
+    t.float "rape_rate"
+    t.integer "robbery"
+    t.float "robbery_rate"
+    t.integer "aggrevated_assault"
+    t.float "aggrevated_assault_rate"
+    t.integer "property_crime"
+    t.float "property_crime_rate"
+    t.integer "burglary"
+    t.float "burglary_rate"
+    t.integer "larceny_theft"
+    t.float "larceny_theft_rate"
+    t.integer "motor_vehicle_theft"
+    t.float "motor_vehicle_theft_rate"
+    t.bigint "state_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state_id"], name: "index_cities_on_state_id"
   end
 
   create_table "crimes", force: :cascade do |t|
@@ -58,4 +85,5 @@ ActiveRecord::Schema.define(version: 20171031170355) do
   end
 
   add_foreign_key "avg_weekly_reports", "states"
+  add_foreign_key "cities", "states"
 end

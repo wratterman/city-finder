@@ -6,8 +6,8 @@ class Api::V1::CrimeYearsController < ApplicationController
   end
 
   def show
-    year = params[:year]
-    render json: Crime.find_by(year: year)
+    requested_year = params[:year]
+    render json: Crime.find_by(year: requested_year)
   end
 
   private

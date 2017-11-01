@@ -9,7 +9,6 @@ require 'CSV'
 require 'Date'
 
 def seed_crimes
-  Crime.destroy_all
   CSV.foreach("./db/csvs/FBI-Crime-Data.csv", :headers => true) do |row|
     crime = Crime.new(
       year: row[0].to_i,
@@ -38,12 +37,11 @@ def seed_crimes
   end
 end
 
-def seed_states_with_employment
-  AvgWeeklyReport.destroy_all
-  State.destroy_all
+def seed_states_with_employment_and_cities
   CSV.foreach("./db/csvs/Avg-Weekly-Hours.csv", encoding: "bom|utf-8",:headers => true) do |row|
     state = State.create(name: row["State"])
     seed_reports(state)
+    seed_cities(state)
     puts "Weekly Reports saved for for #{state.name}"
   end
 end
@@ -88,6 +86,63 @@ def seed_reports(state)
   report_3.save
 end
 
+def seed_cities(state)
+  prev_state = ""
+  current_state = false
+  CSV.foreach("./db/csvs/Crimes-By-State.csv", encoding: "bom|utf-8", :headers => true) do |row|
+    if row["State"].nil?
+      row["State"] = prev_state
+    end
+    if state.name.downcase == row["State"].downcase
+      current_state = true
+      prev_state = state.name
+    else
+      current_state = false
+      prev_state = ""
+    end
+    unless current_state == false
+      create_cities(row, state)
+    end
+  end
+end
+
+def create_cities(row, state)
+    city = City.new(
+      name: row["City"],
+      population: row["Population"],
+      violent_crime: row["Violent\rcrime"],
+      violent_crime_rate: calculate_rate(row["Population"], row["Violent\rcrime"]),
+      murder_manslaughter: row["Murder and\rnonnegligent\rmanslaughter"],
+      murder_manslaughter_rate: calculate_rate(row["Population"], row["Murder and\rnonnegligent\rmanslaughter"]),
+      rape: row["Rape1"] || row["Rape2"],
+      rape_rate: calculate_rate(row["Population"], (row["Rape1"] || row["Rape2"])),
+      robbery: row["Robbery"],
+      robbery_rate: calculate_rate(row["Population"], row["Robbery"]),
+      aggrevated_assault: row["Aggravated\rassault"],
+      aggrevated_assault_rate: calculate_rate(row["Population"], row["Aggravated\rassault"]),
+      property_crime: row["Property\rcrime"],
+      property_crime_rate: calculate_rate(row["Population"], row["Property\rcrime"]),
+      burglary: row["Burglary"],
+      burglary_rate: calculate_rate(row["Population"], row["Burglary"]),
+      larceny_theft: row["Burglary"],
+      larceny_theft_rate: calculate_rate(row["Population"], row["Burglary"]),
+      motor_vehicle_theft: row["Motor\rvehicle\rtheft"],
+      motor_vehicle_theft_rate: calculate_rate(row["Population"], row["Motor\rvehicle\rtheft"]),
+      state: state
+    )
+    city.save
+    puts "#{city.name} filled for #{state.name}"
+end
+
+def calculate_rate(pop, crime)
+  rate = crime.to_f / pop.to_f
+  return rate.round(1)
+end
+
+def nil_finder(row)
+  return 0 if row.nil?
+end
+
 def sanitize(row_header)
   if row_header.include?(",")
     row_header.gsub!(",", "")
@@ -95,5 +150,13 @@ def sanitize(row_header)
   return row_header
 end
 
-seed_crimes
-seed_states_with_employment
+def seed_database
+  Crime.destroy_all
+  AvgWeeklyReport.destroy_all
+  City.destroy_all
+  State.destroy_all
+  seed_crimes
+  seed_states_with_employment_and_cities
+end
+
+seed_database
