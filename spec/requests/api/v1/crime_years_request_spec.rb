@@ -12,8 +12,14 @@ describe "Crime Years API" do
 
       crimes = JSON.parse(body)
 
-      expect(crimes.count).to eq(3)
+      expect(crimes.count).to eq(crime_list.count)
+
       expect(crimes.first["id"]).to eq(crime_list.first.id)
+      expect(crimes.first["id"]).to_not eq(crime_list[1].id)
+      expect(crimes.first["id"]).to_not eq(crime_list.last.id)
+
+      expect(crimes.last["id"]).to_not eq(crime_list.first.id)
+      expect(crimes.last["id"]).to_not eq(crime_list[1].id)
       expect(crimes.last["id"]).to eq(crime_list.last.id)
     end
 

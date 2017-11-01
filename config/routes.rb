@@ -8,5 +8,4 @@ Rails.application.routes.draw do
   get 'api/v1/most_dangerous_cities', to: "api/v1/most_dangerous_cities#index"
   get 'api/v1/avg_weekly_reports/', to: "api/v1/states#index", as: :states
   get 'api/v1/avg_weekly_reports/:id', to: "api/v1/states#show", as: :state
-
 end
