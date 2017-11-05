@@ -35,11 +35,11 @@
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">By State
       <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <% @states.each do |state| %>
-        <button id= "<%= state.id %>"class="stateSelector">
-          <%= state.name %>
-        </button>
+      <ul class="dropdown-menu" id="stateDropdown">
+        <% @states[:all].each do |state| %>
+          <button id= "<%= state.id %>"class="stateSelector"name= "<%=state.name%>">
+            <%= state.name %>
+          </button>
         <% end %>
       </ul>
     </li>
@@ -53,6 +53,23 @@
     <script type="text/javascript">
     </script>
   </div>
+
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cities
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu" id="cityDropdown">
+        <% @states[:current].cities.reverse.each do |city| %>
+          <button id= "<%= city.id %>"class="citiesSelector" value="<%= city.state_id%>" name= "<%=city.name%>">
+            <%= city.name %>
+          </button>
+        <% end %>
+      </ul>
+    </li>
+  <h3 class=currentCity></h3>
+  <div id="pieCrimesContainer">
+    <script type="text/javascript">
+    </script>
+  </div>
   </html>
 
   <script type="text/javascript">
@@ -60,6 +77,15 @@
       $(".stateSelector").on("click", function(){
         fillDisplayCities(this.id)
         fillDisplayReports(this.id)
+        fillCitiesDropdown(this.id)
+      })
+    }
+
+    function currentCityListener() {
+      $(".citiesSelector").on("click", function(){
+        let cityId = this.id
+        let stateId = $(".currentState").children().attr("id")
+        fillDisplayPieCrimes(stateId, cityId)
       })
     }
 
@@ -71,9 +97,7 @@
           $("#citiesContainer").empty()
           var svg = dimple.newSvg("#citiesContainer", 590, 400);
           var cities = []
-          let stateName = "";
           data.forEach(function(city) {
-            stateName = city.state
             cities.push({ "City":`${city.name}`, "Population":city.population })
           })
           var myChart = new dimple.chart(svg, cities);
@@ -95,9 +119,8 @@
           $("#reportsContainer").empty()
           var svg = dimple.newSvg("#reportsContainer", 590, 400);
           var months = []
-          let stateName = "";
+          let stateName = data[0].state;
           data.forEach(function(report) {
-            stateName = report.state
             months.push({ "Month/Year":`${report.month_year}`, "Weekly Earnings":report.avg_weekly_earnings })
           })
           var myChart = new dimple.chart(svg, months);
@@ -108,7 +131,48 @@
           myChart.addSeries(null, dimple.plot.bar);
           myChart.draw();
           $(".currentState").empty()
-          $(".currentState").append(`<h3 class='currentState'>${stateName}</h3>`)
+          $(".currentState").append(`<h3 class='currentState' id=${stateId}>${stateName}</h3>`)
+          $.ajax({
+            type: 'GET',
+            url: `api/v1/crime_states/${stateId}/cities`,
+            success: function(data) {
+              $("#cityDropdown").empty()
+              data.cities.forEach(function(city) {
+                $("#cityDropdown").append(`<button id=${city.id} value=${city.state_id} class="citiesSelector"name=${city.name}>${city.name}</button>`)
+              })
+              currentCityListener()
+            }
+          })
+        }
+      })
+    }
+
+    function fillDisplayPieCrimes(stateId, cityId) {
+      $.ajax({
+        type: "GET",
+        url: `api/v1/crime_states/${stateId}/cities/${cityId}`,
+        success: function(data) {
+          $("#pieCrimesContainer").empty()
+          var svg = dimple.newSvg("#pieCrimesContainer", 590, 400);
+          var crimes = []
+          var cityName = data.name
+          crimes.push({ "Crime": "Violent Crime", "Rate": data.violent_crime_rate})
+          crimes.push({ "Crime": "Murder/Manslaughter", "Rate": data.murder_manslaughter_rate})
+          crimes.push({ "Crime": "Rape", "Rate": data.rape_rate})
+          crimes.push({ "Crime": "Robbery", "Rate": data.robbery_rate})
+          crimes.push({ "Crime": "Aggrevated Assualt", "Rate": data.aggrevated_assault_rate})
+          crimes.push({ "Crime": "Property Crime", "Rate": data.property_crime_rate})
+          crimes.push({ "Crime": "Burglary", "Rate": data.burglary_rate})
+          crimes.push({ "Crime": "Larceny Theft", "Rate": data.larceny_theft_rate})
+          crimes.push({ "Crime": "Motor Vehicle Theft", "Rate": data.motor_vehicle_rate})
+          var myChart = new dimple.chart(svg, crimes);
+          myChart.setBounds(20, 20, 460, 360)
+          myChart.addMeasureAxis("p", "Rate");
+          myChart.addSeries("Crime", dimple.plot.pie);
+          myChart.addLegend(500, 20, 90, 300, "left");
+          myChart.draw();
+          $(".currentCity").empty()
+          $(".currentCity").append(`<h3 class='currentCity'>${cityName}</h3>`)
         }
       })
     }
@@ -116,7 +180,9 @@
     $(document).ready(function() {
       fillDisplayCities("6")
       fillDisplayReports("6")
+      fillDisplayPieCrimes("6", "938")
       populatedChartsListener()
+      currentCityListener()
     })
 
   </script>
