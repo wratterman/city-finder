@@ -88,4 +88,8 @@ class City < ApplicationRecord
       City.where("population > ? AND state_id = ?", 10000, state_id).order(motor_vehicle_theft_rate: :ASC).limit(limit)
     end
   end
+
+  def for_display(state_id, limit)
+    City.where(state_id: state_id).order(population: :DESC).limit(limit)
+  end
 end

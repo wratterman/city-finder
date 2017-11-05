@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # API
   get 'api/v1/crime_years/', to: "api/v1/crime_years#index", as: :crimes
   get 'api/v1/crime_years/:year', to: "api/v1/crime_years#show", as: :crime
   get 'api/v1/crime_states/', to: "api/v1/crime_states#index"
@@ -11,5 +12,10 @@ Rails.application.routes.draw do
   get 'api/v1/crime_states/:state/safest_cities', to: "api/v1/crime_states/safest_cities#index"
   get 'api/v1/avg_weekly_reports/', to: "api/v1/states#index", as: :states
   get 'api/v1/avg_weekly_reports/:id', to: "api/v1/states#show", as: :state
+  get 'api/v1/:state_id/display_reports', to: "api/v1/states/display_reports#index"
+  get 'api/v1/:state_id/display_cities', to: "api/v1/states/display_cities#index"
 
+  # User
+
+  get '/', to: 'welcome#index', as: :welcome
 end
