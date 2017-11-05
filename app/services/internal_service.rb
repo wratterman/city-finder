@@ -10,7 +10,7 @@ class InternalService
   end
 
   def self.get_display_cities(state_id)
-    new(state_id).display_reports
+    new(state_id).display_cities
   end
 
   def display_cities
@@ -27,7 +27,6 @@ class InternalService
 
   def get_url(url)
     response = Faraday.get(base + url)
-    binding.pry
     JSON.parse(response.body, symbolize_names: true)
   end
 end
