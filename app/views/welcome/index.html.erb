@@ -32,12 +32,36 @@
     </div>
   </nav>
   <html>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">By State
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <% @states.each do |state| %>
+        <button id= "<%= state.id %>"class="stateSelector">
+          <%= state.name %>
+        </button>
+        <% end %>
+      </ul>
+    </li>
   <div id="chartContainer">
     <script type="text/javascript">
+    </script>
+  </div>
+  </html>
+
+  <script type="text/javascript">
+    function populatedCitiesListener() {
+      $(".stateSelector").on("click", function(){
+        fillDisplayCites(this.id)
+      })
+    }
+
+    function fillDisplayCites(stateId) {
       $.ajax({
         type: "GET",
-        url: "api/v1/6/display_cities?limit=10",
+        url: `api/v1/${stateId}/display_cities?limit=10`,
         success: function(data) {
+          $("#chartContainer").empty()
           var svg = dimple.newSvg("#chartContainer", 590, 400);
           var cities = []
           data.forEach(function(city) {
@@ -52,7 +76,12 @@
           myChart.draw();
         }
       })
-    </script>
-  </div>
-  </html>
+    }
+
+    $(document).ready(function() {
+      fillDisplayCites("6")
+      populatedCitiesListener()
+    })
+
+  </script>
 </body>
