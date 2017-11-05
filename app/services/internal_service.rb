@@ -27,6 +27,7 @@ class InternalService
 
   def get_url(url)
     response = Faraday.get(base + url)
+    binding.pry
     JSON.parse(response.body, symbolize_names: true)
   end
 end
