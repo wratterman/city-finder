@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   # User
 
   get '/', to: 'welcome#index', as: :welcome
+  get '/states', to: 'states#index', as: :view_states
+  get '/states/:state', to: 'states#show', as: :view_state
 end

@@ -1,75 +1,52 @@
 <head>
   <meta charset="utf-8">
   <meta content="utf-8" http-equiv="encoding">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="http://d3js.org/d3.v4.min.js"></script>
   <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
 </head>
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">CityFinder</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Economics By State</a></li>
-        <li><a href="#">Crimes</a></li>
-      </ul>
-      <form class="navbar-form navbar-left">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search">
-          <div class="input-group-btn">
-            <button class="btn btn-default" type="submit">
-              <i class="glyphicon glyphicon-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </nav>
   <html>
-  <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">By State
-      <span class="caret"></span></a>
-      <ul class="dropdown-menu" id="stateDropdown">
-        <% @states[:all].each do |state| %>
-          <button id= "<%= state.id %>"class="stateSelector"name= "<%=state.name%>">
-            <%= state.name %>
-          </button>
-        <% end %>
-      </ul>
-    </li>
-    <h3 class=currentState></h3>
-  <div id="citiesContainer">
-    <script type="text/javascript">
-    </script>
-  </div>
+  <container class="stateCharts">
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">By State
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" id="stateDropdown">
+          <% @states[:all].each do |state| %>
+            <button id= "<%= state.id %>"class="stateSelector"name= "<%=state.name%>">
+              <%= state.name %>
+            </button>
+          <% end %>
+        </ul>
+      </li>
+      <h3 class=currentState></h3>
+    <div id="citiesContainer" style="width:20%">
+      <script type="text/javascript">
+      </script>
+    </div>
 
-  <div id="reportsContainer">
-    <script type="text/javascript">
-    </script>
-  </div>
-
-  <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cities
-      <span class="caret"></span></a>
-      <ul class="dropdown-menu" id="cityDropdown">
-        <% @states[:current].cities.reverse.each do |city| %>
-          <button id= "<%= city.id %>"class="citiesSelector" value="<%= city.state_id%>" name= "<%=city.name%>">
-            <%= city.name %>
-          </button>
-        <% end %>
-      </ul>
-    </li>
-  <h3 class=currentCity></h3>
-  <div id="pieCrimesContainer">
-    <script type="text/javascript">
-    </script>
-  </div>
+    <div id="reportsContainer" style="width:20%">
+      <script type="text/javascript">
+      </script>
+    </div>
+  </container>
+  <container class="cityPieChart">
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cities
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" id="cityDropdown">
+          <% @states[:current].cities.reverse.each do |city| %>
+            <button id= "<%= city.id %>"class="citiesSelector" value="<%= city.state_id%>" name= "<%=city.name%>">
+              <%= city.name %>
+            </button>
+          <% end %>
+        </ul>
+      </li>
+    <h3 class=currentCity></h3>
+    <div id="pieCrimesContainer">
+      <script type="text/javascript">
+      </script>
+    </div>
+  </container>
   </html>
 
   <script type="text/javascript">
@@ -95,13 +72,13 @@
         url: `api/v1/${stateId}/display_cities?limit=10`,
         success: function(data) {
           $("#citiesContainer").empty()
-          var svg = dimple.newSvg("#citiesContainer", 590, 400);
+          var svg = dimple.newSvg("#citiesContainer", 350, 350);
           var cities = []
           data.forEach(function(city) {
             cities.push({ "City":`${city.name}`, "Population":city.population })
           })
           var myChart = new dimple.chart(svg, cities);
-          myChart.setBounds(60, 30, 510, 305)
+          myChart.setBounds(55, 20, 300, 172)
           var x = myChart.addCategoryAxis("x", "City");
           x.addOrderRule("Date");
           myChart.addMeasureAxis("y", "Population");
@@ -117,17 +94,18 @@
         url: `api/v1/${stateId}/display_reports`,
         success: function(data) {
           $("#reportsContainer").empty()
-          var svg = dimple.newSvg("#reportsContainer", 590, 400);
+          var svg = dimple.newSvg("#reportsContainer", 350, 350);
           var months = []
           let stateName = data[0].state;
           data.forEach(function(report) {
-            months.push({ "Month/Year":`${report.month_year}`, "Weekly Earnings":report.avg_weekly_earnings })
+            months.push({ "Month/Year":`${report.month_year}`, "Weekly Earnings-Dollars":report.avg_weekly_earnings })
           })
           var myChart = new dimple.chart(svg, months);
-          myChart.setBounds(60, 30, 510, 305)
+          myChart.setBounds(55, 20, 300, 172)
           var x = myChart.addCategoryAxis("x", "Month/Year");
           x.addOrderRule("Date");
-          myChart.addMeasureAxis("y", "Weekly Earnings");
+          var y = myChart.addMeasureAxis("y", "Weekly Earnings-Dollars");
+          y.overrideMin = 400;
           myChart.addSeries(null, dimple.plot.bar);
           myChart.draw();
           $(".currentState").empty()
@@ -138,7 +116,16 @@
             success: function(data) {
               $("#cityDropdown").empty()
               data.cities.forEach(function(city) {
-                $("#cityDropdown").append(`<button id=${city.id} value=${city.state_id} class="citiesSelector"name=${city.name}>${city.name}</button>`)
+                $("#cityDropdown").append(`<button id=${city.id} value=${city.state_id} style="border:none; background:none" class="citiesSelector"name=${city.name}>${city.name}</button>`)
+                $("#cityDropdown").css({
+                  'background-color':'White',
+                  'background-repeat':'no-repeat',
+                  'cursor':'pointer',
+                  'overflow':'hidden',
+                  'font-family':'serif',
+                  'font-size':'12px',
+                  'color':'#52527a'
+                })
               })
               currentCityListener()
             }
@@ -166,10 +153,10 @@
           crimes.push({ "Crime": "Larceny Theft", "Rate": data.larceny_theft_rate})
           crimes.push({ "Crime": "Motor Vehicle Theft", "Rate": data.motor_vehicle_rate})
           var myChart = new dimple.chart(svg, crimes);
-          myChart.setBounds(20, 20, 460, 360)
+          myChart.setBounds(10, 10, 230, 180)
           myChart.addMeasureAxis("p", "Rate");
           myChart.addSeries("Crime", dimple.plot.pie);
-          myChart.addLegend(500, 20, 90, 300, "left");
+          myChart.addLegend(250, 10, 45, 150, "left");
           myChart.draw();
           $(".currentCity").empty()
           $(".currentCity").append(`<h3 class='currentCity'>${cityName}</h3>`)
