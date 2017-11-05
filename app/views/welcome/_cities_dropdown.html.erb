@@ -1,0 +1,12 @@
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cities
+    <span class="caret"></span></a>
+    <ul class="dropdown-menu" id="cityDropdown">
+      <% @states[:current].cities.reverse.each do |city| %>
+        <button id= "<%= city.id %>"class="citiesSelector" value="<%= city.state_id%>" name= "<%=city.name%>">
+          <%= city.name %>
+        </button>
+        <%= link_to "View More", "states/#{city.state.id}/cities/#{city.id}"%>
+      <% end %>
+    </ul>
+  </li>

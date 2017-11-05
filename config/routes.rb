@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get '/', to: 'welcome#index', as: :welcome
   get '/states', to: 'states#index', as: :view_states
   get '/states/:state', to: 'states#show', as: :view_state
+  get '/states/:state_id/cities/:city_id', to: 'states/cities#show', as: :view_city
 end
