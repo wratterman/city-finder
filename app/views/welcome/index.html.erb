@@ -43,28 +43,37 @@
         <% end %>
       </ul>
     </li>
-  <div id="chartContainer">
+    <h3 class=currentState></h3>
+  <div id="citiesContainer">
+    <script type="text/javascript">
+    </script>
+  </div>
+
+  <div id="reportsContainer">
     <script type="text/javascript">
     </script>
   </div>
   </html>
 
   <script type="text/javascript">
-    function populatedCitiesListener() {
+    function populatedChartsListener() {
       $(".stateSelector").on("click", function(){
-        fillDisplayCites(this.id)
+        fillDisplayCities(this.id)
+        fillDisplayReports(this.id)
       })
     }
 
-    function fillDisplayCites(stateId) {
+    function fillDisplayCities(stateId) {
       $.ajax({
         type: "GET",
         url: `api/v1/${stateId}/display_cities?limit=10`,
         success: function(data) {
-          $("#chartContainer").empty()
-          var svg = dimple.newSvg("#chartContainer", 590, 400);
+          $("#citiesContainer").empty()
+          var svg = dimple.newSvg("#citiesContainer", 590, 400);
           var cities = []
+          let stateName = "";
           data.forEach(function(city) {
+            stateName = city.state
             cities.push({ "City":`${city.name}`, "Population":city.population })
           })
           var myChart = new dimple.chart(svg, cities);
@@ -78,9 +87,36 @@
       })
     }
 
+    function fillDisplayReports(stateId) {
+      $.ajax({
+        type: "GET",
+        url: `api/v1/${stateId}/display_reports`,
+        success: function(data) {
+          $("#reportsContainer").empty()
+          var svg = dimple.newSvg("#reportsContainer", 590, 400);
+          var months = []
+          let stateName = "";
+          data.forEach(function(report) {
+            stateName = report.state
+            months.push({ "Month/Year":`${report.month_year}`, "Weekly Earnings":report.avg_weekly_earnings })
+          })
+          var myChart = new dimple.chart(svg, months);
+          myChart.setBounds(60, 30, 510, 305)
+          var x = myChart.addCategoryAxis("x", "Month/Year");
+          x.addOrderRule("Date");
+          myChart.addMeasureAxis("y", "Weekly Earnings");
+          myChart.addSeries(null, dimple.plot.bar);
+          myChart.draw();
+          $(".currentState").empty()
+          $(".currentState").append(`<h3 class='currentState'>${stateName}</h3>`)
+        }
+      })
+    }
+
     $(document).ready(function() {
-      fillDisplayCites("6")
-      populatedCitiesListener()
+      fillDisplayCities("6")
+      fillDisplayReports("6")
+      populatedChartsListener()
     })
 
   </script>
