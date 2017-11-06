@@ -1,30 +1,7 @@
 <container class="stateBio">
-  <container class="myInfo" id="<%=@state.id%>">
-    <h3>My Info</h3>
-    <p>
-      <strong>State</strong>: <%= @state.name %> <br>
-      <strong>Population</strong>: <%= @state.total_population %> <br>
-      <strong>Number of Cities</strong>: <%= @state.cities.count %>
-    </p>
-  </container>
-
+  <%= render "bio_info" %>
   <container class="mostDangerousCities">
-    <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sort by Crimes
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu" id="crimeDropdown">
-          <button style="border:none; background:none" class="violent_crime">Violent Crime</button>
-          <button style="border:none; background:none" class="murder">Murder/Manslaughter</button>
-          <button style="border:none; background:none" class="rape">Rape</button>
-          <button style="border:none; background:none" class="robbery">Robbery</button>
-          <button style="border:none; background:none" class="aggrevated_assault">Aggrevated Assault</button>
-          <button style="border:none; background:none" class="property_crime">Propery Crime</button>
-          <button style="border:none; background:none" class="burglary">Burglary</button>
-          <button style="border:none; background:none" class="larceny_theft">Larceny Theft</button>
-          <button style="border:none; background:none" class="motor_vehicle_theft">Motor Vehicle Theft</button>
-        </ul>
-        <h4 class="currentCrimeFilter">Violent Crime</h4>
-      </li>
+    <%= render "crime_dropdown" %>
       <h5>Most Dangerous Cities</h5>
       <h5>Safest Cities</h5>
     <div>
@@ -38,4 +15,19 @@
       </ul>
     </div>
   </container>
+</container>
+<container>
+  <div id="economicsContainer">
+    <h6>Average Hours Worked per Week</h6>
+    <div class="weeklyHoursContainer" id="container">
+    </div>
+
+    <h6>Average Hourly Wage</h6>
+    <div class="hourlyWagesContainer" id="container">
+    </div>
+
+    <h6>Average Total Earnings per Week</h6>
+    <div class="weeklyEarningsContainer" id="container">
+    </div>
+  </div>
 </container>

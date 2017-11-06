@@ -27,9 +27,42 @@ function fillSafestCities(crime) {
         let rowWithCrime = identifyCrime(crime, city)
         let rowWithLink = `<a href=${stateId}/cities/${city.id}>View More</div> <br>`
         $(".safestCitiesList").append(rowWithName + rowWithCrime + rowWithLink)
-    })
+      })
     }
   })
+}
+
+function fillEconChart() {
+  let stateId = $(".myInfo").attr("id")
+  $.ajax({
+    type: "GET",
+    url: `http://localhost:3000/api/v1/avg_weekly_reports/${stateId}`,
+    success: function(data) {
+      let weekly_hours = []
+      let hourly_wages = []
+      let weekly_earnings = []
+      data.avg_weekly_reports.forEach(function(report) {
+        weekly_hours.push({"MonthYear": report.month_year, "weeklyHours": report.avg_weekly_hours})
+        hourly_wages.push({"MonthYear": report.month_year, "hourlyWages": report.avg_hourly_wages})
+        weekly_earnings.push({"MonthYear": report.month_year, "weeklyEarnings": report.avg_weekly_earnings})
+      })
+      fillLineGraph(weekly_hours, "weeklyHours")
+      fillLineGraph(hourly_wages, "hourlyWages")
+      fillLineGraph(weekly_earnings, "weeklyEarnings")
+    }
+  })
+}
+
+function fillLineGraph(data, reportName) {
+  $(`.${reportName}Container`).empty()
+  var svg = dimple.newSvg(`.${reportName}Container`,  250, 250);
+  var myChart = new dimple.chart(svg, data)
+  myChart.setBounds(45, 15, 200, 150)
+  var x = myChart.addCategoryAxis("x", "MonthYear")
+  x.addOrderRule("Date")
+  myChart.addMeasureAxis("y", reportName)
+  var s = myChart.addSeries(null, dimple.plot.line)
+  myChart.draw()
 }
 
 function crimeFilterListener() {
@@ -68,7 +101,7 @@ function identifyCrime(crime, city) {
       return `<li class="crime">Burglary Rate: ${city.burglary_rate}</li>`
       break;
     case "larceny_theft":
-      return `<li class="crime">larceny_theft Theft Rate: ${city.larceny_theft_rate}</li>`
+      return `<li class="crime">Larceny Theft Rate: ${city.larceny_theft_rate}</li>`
       break;
     case "motor_vehicle_theft":
       return `<li class="crime">Motor Vehicle Theft Rate: ${city.motor_vehicle_theft_rate}</li>`
@@ -79,5 +112,6 @@ function identifyCrime(crime, city) {
 $(document).ready(function() {
   fillMostDangerousCities("violent_crime")
   fillSafestCities("violent_crime")
+  fillEconChart()
   crimeFilterListener()
 })
