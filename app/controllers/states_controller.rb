@@ -25,5 +25,6 @@ class StatesController < ApplicationController
     multiname_state.map! do |name|
       name.capitalize
     end
+    multiname_state.join(" ")
   end
 end
