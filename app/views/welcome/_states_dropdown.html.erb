@@ -6,7 +6,7 @@
         <button id= "<%= state.id %>"class="stateSelector"name= "<%=state.name%>">
           <%= state.name %>
         </button>
-        <%= link_to "View More", "states/#{state.id}"%>
+        <%= link_to "View More", "states/#{state.name}"%>
       <% end %>
     </ul>
   </li>

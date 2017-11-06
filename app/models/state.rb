@@ -2,6 +2,10 @@ class State < ApplicationRecord
   has_many :avg_weekly_reports
   has_many :cities
 
+  def total_population
+    cities.sum(:population)
+  end
+
   def self.display_reports(state_id)
     InternalService.get_display_reports(state_id).map do |report|
       DisplayReport.new(report)

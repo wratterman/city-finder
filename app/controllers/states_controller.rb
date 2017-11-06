@@ -1,5 +1,4 @@
 class StatesController < ApplicationController
-
   before_action :sanitize_state, only: [:show]
 
   def index
@@ -7,6 +6,7 @@ class StatesController < ApplicationController
   end
 
   def show
+    @state
   end
 
   private

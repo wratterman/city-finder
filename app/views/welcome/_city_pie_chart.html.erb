@@ -1,5 +1,7 @@
 <container class="cityPieChart">
-  <%= render "cities_dropdown" %>
-  <h3 class=currentCity></h3>
-  <%= render "pie_crimes_container" %>
+  <% cache("city-crimes-chart") do %>
+    <%= render "cities_dropdown" %>
+    <h3 class=currentCity></h3>
+    <%= render "pie_crimes_container" %>
+  <% end %>
 </container>

@@ -66,7 +66,7 @@ function fillDisplayReports(stateId) {
         success: function(data) {
           $("#cityDropdown").empty()
           data.cities.forEach(function(city) {
-            $("#cityDropdown").append(`<button id=${city.id} value=${city.state_id} style="border:none; background:none" class="citiesSelector"name=${city.name}>${city.name}</button><a href=states/${stateId}/cities/${city.id}>View More`)
+            $("#cityDropdown").append(`<button id=${city.id} value=${city.state_id} style="border:none; background:none" class="citiesSelector"name=${city.name}>${city.name}</button><a href=states/${stateName}/cities/${city.id}>View More`)
             $("#cityDropdown").css({
               'background-color':'White',
               'background-repeat':'no-repeat',

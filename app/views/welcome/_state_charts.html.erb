@@ -1,6 +1,8 @@
 <container class="stateCharts">
-  <%= render "states_dropdown" %>
-  <h3 class=currentState></h3>
-  <%= render "cities_container" %>
-  <%= render "reports_container" %>
+  <% cache("states-reports") do %>
+    <%= render "states_dropdown" %>
+    <h3 class=currentState></h3>
+    <%= render "cities_container" %>
+    <%= render "reports_container" %>
+  <% end %>
 </container>

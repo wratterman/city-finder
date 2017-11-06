@@ -1,0 +1,43 @@
+<container class="stateBio">
+  <container class="myInfo" id="<%=@state.id%>">
+    <h3>My Info</h3>
+    <p>
+      <strong>State</strong>: <%= @state.name %> <br>
+      <strong>Population</strong>: <%= @state.total_population %> <br>
+      <strong>Number of Cities</strong>: <%= @state.cities.count %>
+    </p>
+  </container>
+
+  <container class="mostDangerousCities">
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sort by Crimes
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu" id="stateDropdown">
+          <button class="violent_crime">Violent Crime</button>
+          <button class="murder">Murder/Manslaughter</button>
+          <button class="rape">Rape</button>
+          <button class="robbery">Robbery</button>
+          <button class="aggrevated_assault">Aggrevated Assault</button>
+          <button class="property_crime">Propery Crime</button>
+          <button class="burglary">Burglary</button>
+          <button class="larceny_theft">Larceny Theft</button>
+          <button class="motor_vehicle_theft">Motor Vehicle Theft</button>
+        </ul>
+      </li>
+    <h5 class="currentCrimeFilter">Violent Crime</h5>
+    <h4>Most Dangerous Cities</h4>
+    <div>
+      <ul class="dangerousCitiesList">
+
+      </ul>
+    </div>
+  </container>
+  <container class="safestCities">
+    <h4>Safest Cities</h4>
+    <div>
+      <ul class="safestCitiesList">
+
+      </ul>
+    </div>
+  </container>
+</container>
