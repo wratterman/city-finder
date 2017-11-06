@@ -114,10 +114,70 @@ function fillDisplayPieCrimes(stateId, cityId) {
   })
 }
 
+function fillNationalCrimeChart() {
+  $.ajax({
+    type: "GET",
+    url: `api/v1/crime_years`,
+    success: function(data) {
+      let vc = []
+      let mm = []
+      let rp = []
+      let rb = []
+      let aa = []
+      let pc = []
+      let bg = []
+      let lc = []
+      let mvc = []
+      data.forEach(function(year) {
+        vc.push({"Year": year.year, "Violent Crime": year.violent_crime_rate})
+        mm.push({"Year": year.year, "Murder/Manslaughter": year.murder_manslaughter_rate})
+        rp.push({"Year": year.year, "Rape": year.rape_rate})
+        rb.push({"Year": year.year, "Robbery": year.robbery_rate})
+        aa.push({"Year": year.year, "Aggrevated Assault": year.aggrevated_assault_rate})
+        pc.push({"Year": year.year, "Property Crime": year.property_crime_rate})
+        bg.push({"Year": year.year, "Burglary": year.burglary_rate})
+        lc.push({"Year": year.year, "Larceny Theft": year.larceny_theft_rate})
+        mvc.push({"Year": year.year, "Motor Vehicle Theft": year.motor_vehicle_theft_rate})
+      })
+      let newData = {
+        "Violent Crime": vc, "Murder/Manslaughter": mm, "Rape": rp, "Robbery": rb,
+        "Aggrevated Assault": aa, "Property Crime": pc, "Burglary": bg,
+        "Larceny Theft": lc, "Motor Vehicle Theft": mvc
+      }
+      crimeThroughTheYears(vc, "Violent Crime")
+      nationalCrimeListener(newData)
+    }
+  })
+}
+
+function nationalCrimeListener(allData) {
+  $("#nationalCrimeDropdown").click({allData}, function(data) {
+    let crime = event.target.innerText
+    let years = data.data.allData[crime]
+    crimeThroughTheYears(years, crime)
+    nationalCrimeListener(data.data.allData)
+  })
+}
+
+function crimeThroughTheYears(data, crime) {
+  $(`.nationalCrimeContainer`).empty()
+  $(`.currentCrimeFilter`).empty()
+  $(`.currentCrimeFilter`).append(crime)
+  var svg = dimple.newSvg(`.nationalCrimeContainer`,  250, 250);
+  var myChart = new dimple.chart(svg, data)
+  myChart.setBounds(45, 15, 200, 150)
+  var x = myChart.addCategoryAxis("x", "Year")
+  x.addOrderRule("Date")
+  myChart.addMeasureAxis("y", crime)
+  var s = myChart.addSeries(null, dimple.plot.line)
+  myChart.draw()
+}
+
 $(document).ready(function() {
   fillDisplayCities("6")
   fillDisplayReports("6")
   fillDisplayPieCrimes("6", "938")
+  fillNationalCrimeChart()
   populatedChartsListener()
   currentCityListener()
 })

@@ -3,7 +3,7 @@
     <span class="caret"></span></a>
     <ul class="dropdown-menu" id="cityDropdown">
       <% @state.cities.reverse.each do |city| %>
-        <%= link_to city.name, "cities/#{city.id}"%>
+        <%= link_to city.name, "#{@state.id}/cities/#{city.id}"%>
       <% end %>
     </ul>
   </li>
