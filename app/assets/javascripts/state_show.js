@@ -42,9 +42,9 @@ function fillEconChart() {
       let hourly_wages = []
       let weekly_earnings = []
       data.avg_weekly_reports.forEach(function(report) {
-        weekly_hours.push({"MonthYear": report.month_year, "weeklyHours": report.avg_weekly_hours})
-        hourly_wages.push({"MonthYear": report.month_year, "hourlyWages": report.avg_hourly_wages})
-        weekly_earnings.push({"MonthYear": report.month_year, "weeklyEarnings": report.avg_weekly_earnings})
+        weekly_hours.push({"MonthYear": report.month_year, "weeklyHours": parseFloat(report.avg_weekly_hours)})
+        hourly_wages.push({"MonthYear": report.month_year, "hourlyWages": parseFloat(report.avg_hourly_wages)})
+        weekly_earnings.push({"MonthYear": report.month_year, "weeklyEarnings": parseFloat(report.avg_weekly_earnings)})
       })
       fillLineGraph(weekly_hours, "weeklyHours")
       fillLineGraph(hourly_wages, "hourlyWages")
