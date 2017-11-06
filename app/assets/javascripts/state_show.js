@@ -1,14 +1,14 @@
 function fillMostDangerousCities(crime) {
-  let stateId = $(".myInfo").attr("id")
+  var stateId = $(".myInfo").attr("id")
   $.ajax({
     type: "GET",
     url: `http://localhost:3000/api/v1/crime_states/${stateId}/most_dangerous_cities?crime=${crime}&limit=5`,
     success: function(data) {
       $(".dangerousCitiesList").empty()
       data.most_dangerous_cities.forEach(function(city) {
-        let rowWithName = `<div class="dangerCities"><li class=${city.name} id=${city.id}>City: ${city.name}</li>`
-        let rowWithCrime = identifyCrime(crime, city)
-        let rowWithLink = `<a href=${stateId}/cities/${city.id}>View More</div> <br>`
+        var rowWithName = `<div class="dangerCities"><li class=${city.name} id=${city.id}>City: ${city.name}</li>`
+        var rowWithCrime = identifyCrime(crime, city)
+        var rowWithLink = `<a href=${stateId}/cities/${city.id}>View More</div> <br>`
         $(".dangerousCitiesList").append(rowWithName + rowWithCrime + rowWithLink)
     })
     }
@@ -16,16 +16,16 @@ function fillMostDangerousCities(crime) {
 }
 
 function fillSafestCities(crime) {
-  let stateId = $(".myInfo").attr("id")
+  var stateId = $(".myInfo").attr("id")
   $.ajax({
     type: "GET",
     url: `http://localhost:3000/api/v1/crime_states/${stateId}/safest_cities?crime=${crime}&limit=5`,
     success: function(data) {
       $(".safestCitiesList").empty()
       data.safest_cities.forEach(function(city) {
-        let rowWithName = `<div class="safeCities"><li class=${city.name} id=${city.id}>City: ${city.name}</li>`
-        let rowWithCrime = identifyCrime(crime, city)
-        let rowWithLink = `<a href=${stateId}/cities/${city.id}>View More</div> <br>`
+        var rowWithName = `<div class="safeCities"><li class=${city.name} id=${city.id}>City: ${city.name}</li>`
+        var rowWithCrime = identifyCrime(crime, city)
+        var rowWithLink = `<a href=${stateId}/cities/${city.id}>View More</div> <br>`
         $(".safestCitiesList").append(rowWithName + rowWithCrime + rowWithLink)
       })
     }
@@ -33,14 +33,14 @@ function fillSafestCities(crime) {
 }
 
 function fillEconChart() {
-  let stateId = $(".myInfo").attr("id")
+  var stateId = $(".myInfo").attr("id")
   $.ajax({
     type: "GET",
     url: `http://localhost:3000/api/v1/avg_weekly_reports/${stateId}`,
     success: function(data) {
-      let weekly_hours = []
-      let hourly_wages = []
-      let weekly_earnings = []
+      var weekly_hours = []
+      var hourly_wages = []
+      var weekly_earnings = []
       data.avg_weekly_reports.forEach(function(report) {
         weekly_hours.push({"MonthYear": report.month_year, "weeklyHours": parseFloat(report.avg_weekly_hours)})
         hourly_wages.push({"MonthYear": report.month_year, "hourlyWages": parseFloat(report.avg_hourly_wages)})
@@ -67,8 +67,8 @@ function fillLineGraph(data, reportName) {
 
 function crimeFilterListener() {
   $("#crimeDropdown").on("click", function() {
-    let crime = event.target.classList.value
-    let crimeName = event.target.innerText
+    var crime = event.target.classList.value
+    var crimeName = event.target.innerText
     fillMostDangerousCities(crime)
     fillSafestCities(crime)
     crimeFilterListener()

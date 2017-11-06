@@ -10,8 +10,8 @@ function populatedChartsListener() {
 
 function currentCityListener() {
   $(".citiesSelector").on("click", function(){
-    let cityId = this.id
-    let stateId = $(".currentState").children().attr("id")
+    var cityId = this.id
+    var stateId = $(".currentState").children().attr("id")
     fillDisplayPieCrimes(stateId, cityId)
   })
 }
@@ -46,7 +46,7 @@ function fillDisplayReports(stateId) {
       $("#reportsContainer").empty()
       var svg = dimple.newSvg("#reportsContainer", 350, 350);
       var months = []
-      let stateName = data[0].state;
+      var stateName = data[0].state;
       data.forEach(function(report) {
         months.push({ "Month/Year":`${report.month_year}`, "Weekly Earnings-Dollars":report.avg_weekly_earnings })
       })
@@ -119,15 +119,15 @@ function fillNationalCrimeChart() {
     type: "GET",
     url: `api/v1/crime_years`,
     success: function(data) {
-      let vc = []
-      let mm = []
-      let rp = []
-      let rb = []
-      let aa = []
-      let pc = []
-      let bg = []
-      let lc = []
-      let mvc = []
+      var vc = []
+      var mm = []
+      var rp = []
+      var rb = []
+      var aa = []
+      var pc = []
+      var bg = []
+      var lc = []
+      var mvc = []
       data.forEach(function(year) {
         vc.push({"Year": year.year, "Violent Crime": year.violent_crime_rate})
         mm.push({"Year": year.year, "Murder/Manslaughter": year.murder_manslaughter_rate})
@@ -139,7 +139,7 @@ function fillNationalCrimeChart() {
         lc.push({"Year": year.year, "Larceny Theft": year.larceny_theft_rate})
         mvc.push({"Year": year.year, "Motor Vehicle Theft": year.motor_vehicle_theft_rate})
       })
-      let newData = {
+      var newData = {
         "Violent Crime": vc, "Murder/Manslaughter": mm, "Rape": rp, "Robbery": rb,
         "Aggrevated Assault": aa, "Property Crime": pc, "Burglary": bg,
         "Larceny Theft": lc, "Motor Vehicle Theft": mvc
@@ -152,8 +152,8 @@ function fillNationalCrimeChart() {
 
 function nationalCrimeListener(allData) {
   $("#nationalCrimeDropdown").click({allData}, function(data) {
-    let crime = event.target.innerText
-    let years = data.data.allData[crime]
+    var crime = event.target.innerText
+    var years = data.data.allData[crime]
     crimeThroughTheYears(years, crime)
     nationalCrimeListener(data.data.allData)
   })

@@ -1,0 +1,433 @@
+/* line 1, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/charts.scss */
+.stateCharts {
+  width: 50%;
+  margin-right: 2%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 9, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/charts.scss */
+.cityPieChart {
+  width: 42%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+/* line 1, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.dangerousCitiesList {
+  width: 48%;
+  margin-right: 2%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 9, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.safestCitiesList {
+  width: 48%;
+  margin-left: 2%;
+  margin-right: 2%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 18, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.dangerCities {
+  border: 1px black solid;
+  list-style: none;
+}
+
+/* line 23, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.dangerCities > li {
+  margin: 2px;
+}
+
+/* line 27, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.dangerCities > a {
+  margin: 2px;
+}
+
+/* line 31, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.safeCities {
+  border: 1px black solid;
+  list-style: none;
+}
+
+/* line 36, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.safeCities > li {
+  margin: 2px;
+}
+
+/* line 40, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.safeCities > a {
+  margin: 2px;
+}
+
+/* line 44, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.mostDangerousCities > h5 {
+  float: left;
+  width: 45%;
+  text-align: center;
+  padding: 3px;
+}
+
+/* line 51, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+h4 {
+  text-align: center;
+}
+
+/* line 55, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+#economicsContainer {
+  width: 45%;
+  text-align: center;
+  float: left;
+  margin: 2px;
+  padding: 2px;
+}
+
+/* line 63, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.weeklyHoursContainer {
+  width: 90%;
+  border: 1px solid black;
+  margin: 1px;
+  padding: 1px;
+}
+
+/* line 70, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.hourlyWagesContainer {
+  width: 90%;
+  border: 1px solid black;
+  margin: 1px;
+  padding: 1px;
+}
+
+/* line 77, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.weeklyEarningsContainer {
+  width: 90%;
+  border: 1px solid black;
+  margin: 2px;
+  padding: 2px;
+}
+
+/* line 84, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+#economicsContainer > h6 {
+  width: 90%;
+  text-align: center;
+  margin: 2px;
+  padding: 2px;
+}
+
+/* line 91, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.citiesSelector {
+  background-color: White;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: serif;
+  font-size: 12px;
+  color: #52527a;
+}
+
+/* line 102, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+#cityDropdownForState {
+  width: 50%;
+  float: left;
+}
+/* line 1, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+body {
+  margin: 15px;
+  padding: 10px;
+}
+
+/* line 6, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+h3 {
+  font-size: 22px;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 12, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+a {
+  font-family: serif;
+  font-size: 11px;
+  color: #52527a;
+  font-weight: bolder;
+}
+
+/* line 19, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.stateSelector {
+  background-color: White;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: serif;
+  font-size: 12px;
+  color: #52527a;
+}
+
+/* line 30, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+#crimeDropdown {
+  background-color: White;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: serif;
+  font-size: 12px;
+  color: #52527a;
+}
+
+/* line 41, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.dropdown {
+  list-style: none;
+  text-align: center;
+}
+
+/* line 46, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.dropdown > .dropdown-toggle {
+  color: #52527a;
+  font-family: serif;
+  font-size: 18px;
+}
+
+/* line 52, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.dropdown {
+  color: green;
+}
+
+/* line 56, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.nationalCrimeChart > .dropdown {
+  width: 48%;
+  float: left;
+  padding-bottom: 30px;
+  text-align: center;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+/* line 1, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+body {
+  margin: 15px;
+  padding: 10px;
+}
+
+/* line 6, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+h3 {
+  font-size: 22px;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 12, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+a {
+  font-family: serif;
+  font-size: 11px;
+  color: #52527a;
+  font-weight: bolder;
+}
+
+/* line 19, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.stateSelector {
+  background-color: White;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: serif;
+  font-size: 12px;
+  color: #52527a;
+}
+
+/* line 30, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+#crimeDropdown {
+  background-color: White;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: serif;
+  font-size: 12px;
+  color: #52527a;
+}
+
+/* line 41, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.dropdown {
+  list-style: none;
+  text-align: center;
+}
+
+/* line 46, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.dropdown > .dropdown-toggle {
+  color: #52527a;
+  font-family: serif;
+  font-size: 18px;
+}
+
+/* line 52, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.dropdown {
+  color: green;
+}
+
+/* line 56, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dropdown.scss */
+.nationalCrimeChart > .dropdown {
+  width: 48%;
+  float: left;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* line 1, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/charts.scss */
+.stateCharts {
+  width: 50%;
+  margin-right: 2%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 9, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/charts.scss */
+.cityPieChart {
+  width: 42%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 1, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.dangerousCitiesList {
+  width: 48%;
+  margin-right: 2%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 9, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.safestCitiesList {
+  width: 48%;
+  margin-left: 2%;
+  margin-right: 2%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+
+/* line 18, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.dangerCities {
+  border: 1px black solid;
+  list-style: none;
+}
+
+/* line 23, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.dangerCities > li {
+  margin: 2px;
+}
+
+/* line 27, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.dangerCities > a {
+  margin: 2px;
+}
+
+/* line 31, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.safeCities {
+  border: 1px black solid;
+  list-style: none;
+}
+
+/* line 36, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.safeCities > li {
+  margin: 2px;
+}
+
+/* line 40, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.safeCities > a {
+  margin: 2px;
+}
+
+/* line 44, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.mostDangerousCities > h5 {
+  float: left;
+  width: 45%;
+  text-align: center;
+  padding: 3px;
+}
+
+/* line 51, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+h4 {
+  text-align: center;
+}
+
+/* line 55, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+#economicsContainer {
+  width: 45%;
+  text-align: center;
+  float: left;
+  margin: 2px;
+  padding: 2px;
+}
+
+/* line 63, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.weeklyHoursContainer {
+  width: 90%;
+  border: 1px solid black;
+  margin: 1px;
+  padding: 1px;
+}
+
+/* line 70, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.hourlyWagesContainer {
+  width: 90%;
+  border: 1px solid black;
+  margin: 1px;
+  padding: 1px;
+}
+
+/* line 77, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.weeklyEarningsContainer {
+  width: 90%;
+  border: 1px solid black;
+  margin: 2px;
+  padding: 2px;
+}
+
+/* line 84, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+#economicsContainer > h6 {
+  width: 90%;
+  text-align: center;
+  margin: 2px;
+  padding: 2px;
+}
+
+/* line 91, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+.citiesSelector {
+  background-color: White;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: serif;
+  font-size: 12px;
+  color: #52527a;
+}
+
+/* line 102, /Users/williamratterman/Turing/mod4/projects/city-finder/app/assets/stylesheets/dangerous_safest_cities.scss */
+#cityDropdownForState {
+  width: 50%;
+  float: left;
+}
