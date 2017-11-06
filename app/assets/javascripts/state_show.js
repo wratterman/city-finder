@@ -6,9 +6,9 @@ function fillMostDangerousCities(crime) {
     success: function(data) {
       $(".dangerousCitiesList").empty()
       data.most_dangerous_cities.forEach(function(city) {
-        let rowWithName = `<li class=${city.name} id=${city.id}>City: ${city.name}</li>`
+        let rowWithName = `<div class="dangerCities"><li class=${city.name} id=${city.id}>City: ${city.name}</li>`
         let rowWithCrime = identifyCrime(crime, city)
-        let rowWithLink = `<a href=states/${stateId}/cities/${city.id}>View More <br>`
+        let rowWithLink = `<a href=${stateId}/cities/${city.id}>View More</div> <br>`
         $(".dangerousCitiesList").append(rowWithName + rowWithCrime + rowWithLink)
     })
     }
@@ -23,9 +23,9 @@ function fillSafestCities(crime) {
     success: function(data) {
       $(".safestCitiesList").empty()
       data.safest_cities.forEach(function(city) {
-        let rowWithName = `<li class=${city.name} id=${city.id}>City: ${city.name}</li>`
+        let rowWithName = `<div class="safeCities"><li class=${city.name} id=${city.id}>City: ${city.name}</li>`
         let rowWithCrime = identifyCrime(crime, city)
-        let rowWithLink = `<a href=states/${stateId}/cities/${city.id}>View More <br>`
+        let rowWithLink = `<a href=${stateId}/cities/${city.id}>View More</div> <br>`
         $(".safestCitiesList").append(rowWithName + rowWithCrime + rowWithLink)
     })
     }
@@ -33,7 +33,7 @@ function fillSafestCities(crime) {
 }
 
 function crimeFilterListener() {
-  $("#stateDropdown").on("click", function() {
+  $("#crimeDropdown").on("click", function() {
     let crime = event.target.classList.value
     let crimeName = event.target.innerText
     fillMostDangerousCities(crime)
@@ -73,7 +73,6 @@ function identifyCrime(crime, city) {
     case "motor_vehicle_theft":
       return `<li class="crime">Motor Vehicle Theft Rate: ${city.motor_vehicle_theft_rate}</li>`
       break;
-
   }
 }
 

@@ -1,0 +1,52 @@
+.dangerousCitiesList {
+  width:45%;
+  margin-right:2%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+
+.safestCitiesList {
+  width:45%;
+  margin-left:2%;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+}
+
+.dangerCities {
+  border: 1px black solid;
+  list-style: none;
+}
+
+.dangerCities > li {
+  margin: 2px;
+}
+
+.dangerCities > a {
+  margin: 2px;
+}
+
+.safeCities {
+  border: 1px black solid;
+  list-style: none;
+}
+
+.safeCities > li {
+  margin: 2px;
+}
+
+.safeCities > a {
+  margin: 2px;
+}
+
+.mostDangerousCities > h5 {
+  float: left;
+  width: 45%;
+  text-align: center;
+  padding: 3px;
+}
+
+h4 {
+  text-align: center;
+}

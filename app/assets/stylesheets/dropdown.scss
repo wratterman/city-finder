@@ -17,8 +17,19 @@ a {
 }
 
 .stateSelector {
-  background-color: Transparent;
+  background-color: White;
   background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  font-family: serif;
+  font-size: 12px;
+  color:  #52527a;
+}
+
+#crimeDropdown {
+  background-color: White;
+  background-repeat: no-repeat;
   border: none;
   cursor:pointer;
   overflow: hidden;
