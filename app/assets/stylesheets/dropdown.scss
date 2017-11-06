@@ -52,3 +52,10 @@ a {
 .dropdown {
   color: green;
 }
+
+.nationalCrimeChart > .dropdown {
+  width: 48%;
+  float: left;
+  padding-bottom: 30px;
+  text-align: center;
+}

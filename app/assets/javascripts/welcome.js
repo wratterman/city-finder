@@ -90,7 +90,7 @@ function fillDisplayPieCrimes(stateId, cityId) {
     url: `api/v1/crime_states/${stateId}/cities/${cityId}`,
     success: function(data) {
       $("#pieCrimesContainer").empty()
-      var svg = dimple.newSvg("#pieCrimesContainer", 590, 400);
+      var svg = dimple.newSvg("#pieCrimesContainer", 590, 270);
       var crimes = []
       var cityName = data.name
       crimes.push({ "Crime": "Violent Crime", "Rate": data.violent_crime_rate})
@@ -132,7 +132,7 @@ function fillNationalCrimeChart() {
         vc.push({"Year": year.year, "Violent Crime": year.violent_crime_rate})
         mm.push({"Year": year.year, "Murder/Manslaughter": year.murder_manslaughter_rate})
         rp.push({"Year": year.year, "Rape": year.rape_rate})
-        rb.push({"Year": year.year, "Robbery": year.robbery_rate})
+        rb.push({"Year": year.year, "Robbery": year.robery_rate})
         aa.push({"Year": year.year, "Aggrevated Assault": year.aggrevated_assault_rate})
         pc.push({"Year": year.year, "Property Crime": year.property_crime_rate})
         bg.push({"Year": year.year, "Burglary": year.burglary_rate})
@@ -163,9 +163,9 @@ function crimeThroughTheYears(data, crime) {
   $(`.nationalCrimeContainer`).empty()
   $(`.currentCrimeFilter`).empty()
   $(`.currentCrimeFilter`).append(crime)
-  var svg = dimple.newSvg(`.nationalCrimeContainer`,  250, 250);
+  var svg = dimple.newSvg(`.nationalCrimeContainer`,  400, 250);
   var myChart = new dimple.chart(svg, data)
-  myChart.setBounds(45, 15, 200, 150)
+  myChart.setBounds(45, 15, 350, 150)
   var x = myChart.addCategoryAxis("x", "Year")
   x.addOrderRule("Date")
   myChart.addMeasureAxis("y", crime)
