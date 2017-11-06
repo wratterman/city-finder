@@ -50,5 +50,5 @@ to the views directly, but rather being hit with internal api requests.
  
  #### Graphing Libraries
   - [d3js](https://d3js.org/)
-  - [dimplejs](https://dimplejs.org/
+  - [dimplejs](https://dimplejs.org/)
 
