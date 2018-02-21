@@ -1,6 +1,7 @@
 //= require_tree .
 
 var url = "http://localhost:3000"
+// var url = "https://spooky-werewolf-89206.herokuapp.com/"
 
 function populatedChartsListener() {
   $(".stateSelector").on("click", function(){
