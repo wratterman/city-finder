@@ -1,8 +1,11 @@
+// var url = "http://localhost:3000"
+var url = "https://spooky-werewolf-89206.herokuapp.com/"
+
 function fillMostDangerousCities(crime) {
   var stateId = $(".myInfo").attr("id")
   $.ajax({
     type: "GET",
-    url: `http://localhost:3000/api/v1/crime_states/${stateId}/most_dangerous_cities?crime=${crime}&limit=5`,
+    url: `${url}/api/v1/crime_states/${stateId}/most_dangerous_cities?crime=${crime}&limit=5`,
     success: function(data) {
       $(".dangerousCitiesList").empty()
       data.most_dangerous_cities.forEach(function(city) {
@@ -19,7 +22,7 @@ function fillSafestCities(crime) {
   var stateId = $(".myInfo").attr("id")
   $.ajax({
     type: "GET",
-    url: `http://localhost:3000/api/v1/crime_states/${stateId}/safest_cities?crime=${crime}&limit=5`,
+    url: `${url}/api/v1/crime_states/${stateId}/safest_cities?crime=${crime}&limit=5`,
     success: function(data) {
       $(".safestCitiesList").empty()
       data.safest_cities.forEach(function(city) {
@@ -36,7 +39,7 @@ function fillEconChart() {
   var stateId = $(".myInfo").attr("id")
   $.ajax({
     type: "GET",
-    url: `http://localhost:3000/api/v1/avg_weekly_reports/${stateId}`,
+    url: `${url}/api/v1/avg_weekly_reports/${stateId}`,
     success: function(data) {
       var weekly_hours = []
       var hourly_wages = []

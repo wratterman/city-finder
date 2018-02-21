@@ -1,5 +1,7 @@
 //= require_tree .
 
+var url = "http://localhost:3000"
+
 function populatedChartsListener() {
   $(".stateSelector").on("click", function(){
     fillDisplayCities(this.id)
@@ -19,7 +21,7 @@ function currentCityListener() {
 function fillDisplayCities(stateId) {
   $.ajax({
     type: "GET",
-    url: `http://localhost:3000/api/v1/${stateId}/display_cities?limit=10`,
+    url: `${url}/api/v1/${stateId}/display_cities?limit=10`,
     success: function(data) {
       $("#citiesContainer").empty()
       var svg = dimple.newSvg("#citiesContainer", 350, 350);
@@ -41,7 +43,7 @@ function fillDisplayCities(stateId) {
 function fillDisplayReports(stateId) {
   $.ajax({
     type: "GET",
-    url: `http://localhost:3000/api/v1/${stateId}/display_reports`,
+    url: `${url}/api/v1/${stateId}/display_reports`,
     success: function(data) {
       $("#reportsContainer").empty()
       var svg = dimple.newSvg("#reportsContainer", 350, 350);
@@ -62,7 +64,7 @@ function fillDisplayReports(stateId) {
       $(".currentState").append(`<h3 class='currentState' id=${stateId}>${stateName}</h3>`)
       $.ajax({
         type: 'GET',
-        url: `http://localhost:3000/api/v1/crime_states/${stateId}/cities`,
+        url: `${url}/api/v1/crime_states/${stateId}/cities`,
         success: function(data) {
           $("#cityDropdown").empty()
           data.cities.forEach(function(city) {
@@ -87,7 +89,7 @@ function fillDisplayReports(stateId) {
 function fillDisplayPieCrimes(stateId, cityId) {
   $.ajax({
     type: "GET",
-    url: `http://localhost:3000/api/v1/crime_states/${stateId}/cities/${cityId}`,
+    url: `${url}/api/v1/crime_states/${stateId}/cities/${cityId}`,
     success: function(data) {
       $("#pieCrimesContainer").empty()
       var svg = dimple.newSvg("#pieCrimesContainer", 590, 270);
@@ -117,7 +119,7 @@ function fillDisplayPieCrimes(stateId, cityId) {
 function fillNationalCrimeChart() {
   $.ajax({
     type: "GET",
-    url: `http://localhost:3000/api/v1/crime_years`,
+    url: `${url}/api/v1/crime_years`,
     success: function(data) {
       var vc = []
       var mm = []
